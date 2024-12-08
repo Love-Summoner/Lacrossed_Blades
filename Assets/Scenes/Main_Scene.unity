@@ -470,7 +470,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -488,8 +488,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -235912721
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8f882ad34d019ca468933b3981aed812, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -599,7 +599,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -640,7 +640,7 @@ Transform:
   m_GameObject: {fileID: 1111394698}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0711, y: 0.0866, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 18.6778, y: 10.7533, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -654,6 +654,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1070958882659097036, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1070958882659097036, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1044208733
+      objectReference: {fileID: 0}
+    - target: {fileID: 1070958882659097036, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 1497585371320465083, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.8887591
@@ -698,14 +710,54 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: aafc9fc142439dc49921869b49c10e79, type: 2}
+    - target: {fileID: 2400773462130945970, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.17
+      objectReference: {fileID: 0}
     - target: {fileID: 2406240281530836781, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5755729048033044618, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5755729048033044618, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1350224825
+      objectReference: {fileID: 0}
+    - target: {fileID: 5755729048033044618, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 6407484801983228531, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6407484801983228531, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1350224825
+      objectReference: {fileID: 0}
+    - target: {fileID: 6407484801983228531, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7586380448841302570, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7803280874517735287, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803280874517735287, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1044208733
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803280874517735287, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8896735818535136660, guid: 140bd56a8e4a9564cae6a4efea860633, type: 3}
       propertyPath: m_Name
       value: Knight_character

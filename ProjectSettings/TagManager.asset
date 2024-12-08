@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: characters
+    uniqueID: 3250758563
+    locked: 0
+  - name: limb
+    uniqueID: 2944742471
+    locked: 0
+  - name: items
+    uniqueID: 4059054575
+    locked: 0
