@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player_Controller : MonoBehaviour
 {
     public float speed;
+    public Attack attack;
 
     private Rigidbody2D rb;
     void Start()
@@ -22,5 +23,12 @@ public class Player_Controller : MonoBehaviour
         movement = new Vector2 (horizontal, vertical);
 
         rb.velocity = movement.normalized * speed;
+    }
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            attack.attack();
+        }
     }
 }

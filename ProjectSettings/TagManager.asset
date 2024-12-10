@@ -3,12 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - attack
+  - ball
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - player
   - Water
   - UI
   - 
@@ -49,4 +51,7 @@ TagManager:
     locked: 0
   - name: items
     uniqueID: 4059054575
+    locked: 0
+  - name: UI
+    uniqueID: 2709286563
     locked: 0
