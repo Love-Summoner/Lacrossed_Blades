@@ -30,5 +30,9 @@ public class Player_Controller : MonoBehaviour
         {
             attack.attack();
         }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            attack.thrust();
+        }
     }
 }

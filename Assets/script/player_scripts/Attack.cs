@@ -6,25 +6,49 @@ public class Attack : MonoBehaviour
 {
     public float attack_time, attack_force, throw_force;
     private BoxCollider2D attack_area;
+    public GameObject thrust_area;
+    public ball ball_object;
     void Start()
     {
         attack_area = GetComponent<BoxCollider2D>();
+        thrust_area = transform.GetChild(0).gameObject;
+        ball_object = GameObject.Find("ball").GetComponent<ball>();
     }
 
-    
+    private bool is_attacking = false;
     public void attack()
     {
-        if (attack_area.enabled == false)
+        if (ball_object.is_held) 
+        {
+            throw_ball();
+        }
+        if (!is_attacking)
         {
             StartCoroutine(attack_event());
         }
     }
-
+    public void thrust()
+    {
+        if (!is_attacking)
+        {
+            StartCoroutine(thrust_event());
+        }
+    }
     IEnumerator attack_event()
     {
+        is_attacking = true;
         attack_area.enabled = true;
         yield return new WaitForSeconds(attack_time);
         attack_area.enabled = false;
+        is_attacking = false;
+    }
+    IEnumerator thrust_event()
+    {
+        is_attacking = true;
+        thrust_area.SetActive(true);
+        yield return new WaitForSeconds(attack_time);
+        thrust_area.SetActive(false);
+        is_attacking = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -34,5 +58,12 @@ public class Attack : MonoBehaviour
             rb.velocity = Vector2.zero;
             rb.AddForce(transform.right * attack_force, ForceMode2D.Impulse);
         }
+    }
+    private void throw_ball()
+    {
+        ball_object.is_held = false;
+        Rigidbody2D rb = ball_object.GetComponent<Rigidbody2D>();
+         rb.velocity = Vector2.zero;
+         rb.AddForce(transform.right * attack_force, ForceMode2D.Impulse);
     }
 }

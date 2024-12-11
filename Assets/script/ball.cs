@@ -14,4 +14,8 @@ public class ball : MonoBehaviour
             transform.position = held_location.position;
         }
     }
+    public void change_hold_location(Transform new_loc)
+    {
+        held_location = new_loc;
+    }
 }
