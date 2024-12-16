@@ -14,5 +14,10 @@ public class thrust : MonoBehaviour
             ball.held_location = hold_spot.transform;
             ball.is_held = true;
         }
+        if (collision.CompareTag("Player"))
+        {
+            character c = collision.GetComponent<character>();
+            c.damage();
+        }
     }
 }

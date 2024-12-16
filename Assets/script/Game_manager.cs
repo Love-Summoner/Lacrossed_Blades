@@ -9,7 +9,7 @@ public class Game_manager : MonoBehaviour
     private float time_left;
     private int red_score, blue_score, round_count, round_limit;
     public TMP_Text red_score_board, blue_score_board, Time_board;
-    public float time_per_round;
+    public float time_per_round, respawn_time;
 
     private void Start()
     {
@@ -34,6 +34,7 @@ public class Game_manager : MonoBehaviour
 
         if(time_left < 0)
         {
+            end_game();
             return;
         }
         string seconds_lecf_in_minute = Mathf.FloorToInt(time_left % 60).ToString("00");
@@ -46,6 +47,19 @@ public class Game_manager : MonoBehaviour
     }
     private void end_game()
     {
+        if(Time.timeScale <= 0)
+        {
 
+        }
+    }
+    public void respawn_character(GameObject characer_object)
+    {
+        StartCoroutine(start_respawn(characer_object));
+    }
+    IEnumerator start_respawn(GameObject characer_object)
+    {
+        characer_object.SetActive(false);
+        yield return new WaitForSeconds(respawn_time);
+        characer_object.SetActive(true);
     }
 }

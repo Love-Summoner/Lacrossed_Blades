@@ -8,11 +8,18 @@ public class Attack : MonoBehaviour
     private BoxCollider2D attack_area;
     public GameObject thrust_area;
     public ball ball_object;
-    void Start()
+    private Lacrossed_Blades_player inputActions;
+
+    private void Awake()
     {
+        ball_object = GameObject.Find("ball").GetComponent<ball>();
         attack_area = GetComponent<BoxCollider2D>();
         thrust_area = transform.GetChild(0).gameObject;
-        ball_object = GameObject.Find("ball").GetComponent<ball>();
+    }
+    void Start()
+    {
+        
+        
     }
 
     private bool is_attacking = false;
@@ -52,11 +59,17 @@ public class Attack : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        ball_object = GameObject.Find("ball").GetComponent<ball>();
         if (collision.CompareTag("ball")) 
         {
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
             rb.AddForce(transform.right * attack_force, ForceMode2D.Impulse);
+        }
+        if (collision.CompareTag("Player"))
+        {
+            character c = collision.GetComponent<character>();
+            c.damage();
         }
     }
     private void throw_ball()
