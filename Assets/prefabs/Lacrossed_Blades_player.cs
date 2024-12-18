@@ -62,6 +62,15 @@ public partial class @Lacrossed_Blades_player: IInputActionCollection2, IDisposa
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""751a15b6-7b75-4b73-a394-275cc5dcfe33"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -359,6 +368,28 @@ public partial class @Lacrossed_Blades_player: IInputActionCollection2, IDisposa
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Thrust"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3bdcddb1-75da-469d-8928-a4089e4353c9"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21c1ac15-dc47-4bdc-8267-876b8c241516"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -950,6 +981,7 @@ public partial class @Lacrossed_Blades_player: IInputActionCollection2, IDisposa
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Thrust = m_Player.FindAction("Thrust", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1027,6 +1059,7 @@ public partial class @Lacrossed_Blades_player: IInputActionCollection2, IDisposa
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Thrust;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @Lacrossed_Blades_player m_Wrapper;
@@ -1035,6 +1068,7 @@ public partial class @Lacrossed_Blades_player: IInputActionCollection2, IDisposa
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Thrust => m_Wrapper.m_Player_Thrust;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1056,6 +1090,9 @@ public partial class @Lacrossed_Blades_player: IInputActionCollection2, IDisposa
             @Thrust.started += instance.OnThrust;
             @Thrust.performed += instance.OnThrust;
             @Thrust.canceled += instance.OnThrust;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1072,6 +1109,9 @@ public partial class @Lacrossed_Blades_player: IInputActionCollection2, IDisposa
             @Thrust.started -= instance.OnThrust;
             @Thrust.performed -= instance.OnThrust;
             @Thrust.canceled -= instance.OnThrust;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1258,6 +1298,7 @@ public partial class @Lacrossed_Blades_player: IInputActionCollection2, IDisposa
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnThrust(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -19,4 +19,13 @@ public class Menu_functions : MonoBehaviour
     {
         SceneManager.LoadScene("4_player_game");
     }
+    public void Quit_game()
+    {
+        Application.Quit();
+    }
+    public void load_main_menu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Main_menu");
+    }
 }

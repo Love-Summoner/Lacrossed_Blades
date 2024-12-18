@@ -9,12 +9,12 @@ public class Attack : MonoBehaviour
     public GameObject thrust_area;
     public ball ball_object;
     private Lacrossed_Blades_player inputActions;
+    public Animator animator;
 
     private void Awake()
     {
         ball_object = GameObject.Find("ball").GetComponent<ball>();
         attack_area = GetComponent<BoxCollider2D>();
-        thrust_area = transform.GetChild(0).gameObject;
     }
     void Start()
     {
@@ -45,7 +45,9 @@ public class Attack : MonoBehaviour
     {
         is_attacking = true;
         attack_area.enabled = true;
+        animator.Play("Slash");
         yield return new WaitForSeconds(attack_time);
+        animator.Play("Idle");
         attack_area.enabled = false;
         is_attacking = false;
     }
@@ -53,7 +55,10 @@ public class Attack : MonoBehaviour
     {
         is_attacking = true;
         thrust_area.SetActive(true);
-        yield return new WaitForSeconds(attack_time);
+        animator.Play("Thrust_anim");
+        yield return new WaitForSeconds(.4f);
+        animator.Play("Idle");
+        yield return new WaitForSeconds(attack_time- .4f);
         thrust_area.SetActive(false);
         is_attacking = false;
     }

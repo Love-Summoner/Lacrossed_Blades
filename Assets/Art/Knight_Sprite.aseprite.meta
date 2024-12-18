@@ -8,6 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 1
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -123,15 +124,15 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Knight_Sprite
     originalName: 
-    pivot: {x: 0.5686275, y: -0.37362638}
+    pivot: {x: 0.59183675, y: -0.06666667}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 102
-      height: 91
+      width: 98
+      height: 120
     spriteID: c2cb890697fe9bf4ca8698ff88e6915b
     spriteBone: []
     spriteOutline: []
@@ -144,7 +145,7 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1683902665
+    guid: 1562113837
     name: Knight_Sprite
     layerFlags: 0
     layerType: 0
@@ -152,11 +153,12 @@ ScriptedImporter:
     cells:
     - name: Knight_Sprite
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 6
-        y: 34
-        width: 102
-        height: 91
+        y: 8
+        width: 98
+        height: 120
       spriteId: c2cb890697fe9bf4ca8698ff88e6915b
     linkedCells: []
     parentIndex: -1
@@ -165,3 +167,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 128, y: 128}
+  previousTextureSize: {x: 128, y: 128}

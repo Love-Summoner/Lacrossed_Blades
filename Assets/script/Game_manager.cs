@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class Game_manager : MonoBehaviour
 {
-    public GameObject ball_prefab;
+    public GameObject ball_prefab, red_win_screen, blue_win_screen, pause_menu;
     private float time_left;
     private int red_score, blue_score, round_count, round_limit;
     public TMP_Text red_score_board, blue_score_board, Time_board;
     public float time_per_round, respawn_time;
+    private Lacrossed_Blades_player controls;
+    private void Awake()
+    {
+        controls = new Lacrossed_Blades_player();
 
+    }
     private void Start()
     {
         time_left = time_per_round;
@@ -40,6 +45,10 @@ public class Game_manager : MonoBehaviour
         string seconds_lecf_in_minute = Mathf.FloorToInt(time_left % 60).ToString("00");
 
         Time_board.text = Mathf.FloorToInt(time_left/60).ToString() + ":" + seconds_lecf_in_minute;
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        { 
+            pause_game();
+        }
     }
     private void round_end()
     {
@@ -52,15 +61,19 @@ public class Game_manager : MonoBehaviour
             Time.timeScale = 0;
             if(red_score > blue_score)
             {
-                Debug.Log("red wins");
+                red_win_screen.SetActive(true);
             }
             else
             {
-                Debug.Log("blue wins");
+                blue_win_screen.SetActive(true);
             }
             return;
         }
-        Time.timeScale -=Time.deltaTime;
+        if (red_score != blue_score)
+        {
+            Time.timeScale -= Time.deltaTime;
+        }
+        else { Time.timeScale = 1; }
     }
     public void respawn_character(GameObject characer_object)
     {
@@ -71,5 +84,10 @@ public class Game_manager : MonoBehaviour
         characer_object.SetActive(false);
         yield return new WaitForSeconds(respawn_time);
         characer_object.SetActive(true);
+    }
+    public void pause_game()
+    {
+        pause_menu.SetActive(!pause_menu.activeSelf);
+        Time.timeScale = pause_menu.activeSelf ? 0 : 1;
     }
 }

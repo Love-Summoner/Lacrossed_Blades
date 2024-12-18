@@ -39,7 +39,7 @@ public class Player_controller_manager : MonoBehaviour
                 p.GetComponent<PlayerInput>().enabled = false;
             }
         }
-        if(SceneManager.GetActiveScene().name != "Main_menu")
+        if (SceneManager.GetActiveScene().name != "Main_menu" && gameObject != null)
             Destroy(gameObject);
     }
     public void set_slot(PlayerInput new_input, int slot_number)

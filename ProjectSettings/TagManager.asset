@@ -7,6 +7,8 @@ TagManager:
   - attack
   - ball
   - player_slot
+  - audio_source
+  - audio_manager
   layers:
   - Default
   - TransparentFX
