@@ -18,6 +18,8 @@ public class follow_mouse : MonoBehaviour
     }
     void Update()
     {
+        if(Time.timeScale == 0)
+            return;
         if(is_mouse)
         {
             is_mouse = true;

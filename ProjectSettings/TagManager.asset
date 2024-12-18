@@ -6,6 +6,7 @@ TagManager:
   tags:
   - attack
   - ball
+  - player_slot
   layers:
   - Default
   - TransparentFX

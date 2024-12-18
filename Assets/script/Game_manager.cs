@@ -47,10 +47,20 @@ public class Game_manager : MonoBehaviour
     }
     private void end_game()
     {
-        if(Time.timeScale <= 0)
+        if(Time.timeScale <= .1f)
         {
-
+            Time.timeScale = 0;
+            if(red_score > blue_score)
+            {
+                Debug.Log("red wins");
+            }
+            else
+            {
+                Debug.Log("blue wins");
+            }
+            return;
         }
+        Time.timeScale -=Time.deltaTime;
     }
     public void respawn_character(GameObject characer_object)
     {
