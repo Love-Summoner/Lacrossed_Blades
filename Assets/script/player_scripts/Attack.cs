@@ -84,4 +84,11 @@ public class Attack : MonoBehaviour
          rb.velocity = Vector2.zero;
          rb.AddForce(transform.right * attack_force, ForceMode2D.Impulse);
     }
+    private void OnDisable()
+    {
+        animator.Play("Idle");
+        thrust_area.SetActive(false);
+        is_attacking = false;
+        attack_area.enabled = false;
+    }
 }

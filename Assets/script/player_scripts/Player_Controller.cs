@@ -38,4 +38,8 @@ public class Player_Controller : MonoBehaviour
     {
         movement = context.ReadValue<Vector2>();
     }
+    public void change_movement_from_other_script(Vector2 new_direction)
+    {
+        movement = new_direction;
+    }
 }
