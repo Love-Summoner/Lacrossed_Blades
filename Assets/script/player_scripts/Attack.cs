@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    public AudioSource source, clash_source;
+    public AudioClip[] slash_sounds;
     public float attack_time, attack_force, throw_force;
     private BoxCollider2D attack_area;
     public GameObject thrust_area;
@@ -25,7 +27,7 @@ public class Attack : MonoBehaviour
     private bool is_attacking = false;
     public void attack()
     {
-        if (ball_object.is_held) 
+        if (ball_object.current_holder == gameObject) 
         {
             throw_ball();
         }
@@ -43,6 +45,7 @@ public class Attack : MonoBehaviour
     }
     IEnumerator attack_event()
     {
+        play_slash_sound();
         is_attacking = true;
         attack_area.enabled = true;
         animator.Play("Slash");
@@ -53,6 +56,7 @@ public class Attack : MonoBehaviour
     }
     IEnumerator thrust_event()
     {
+        play_slash_sound();
         is_attacking = true;
         thrust_area.SetActive(true);
         animator.Play("Thrust_anim");
@@ -67,6 +71,8 @@ public class Attack : MonoBehaviour
         ball_object = GameObject.Find("ball").GetComponent<ball>();
         if (collision.CompareTag("ball")) 
         {
+            ball_object.current_holder = null;
+            ball_object.is_held = false;
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
             rb.AddForce(transform.right * attack_force, ForceMode2D.Impulse);
@@ -74,15 +80,36 @@ public class Attack : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             character c = collision.GetComponent<character>();
-            c.damage();
+            c.damage(transform.parent.right);
+        }
+        if (collision.CompareTag("attack") || collision.CompareTag("thrust"))
+        {
+            if (collision.CompareTag("attack"))
+            {
+                character c = collision.transform.parent.parent.GetComponent<character>();
+                c.knockback_player_from_character(transform.parent.right);
+            }
+            else
+            {
+                character c = collision.transform.parent.parent.parent.GetComponent<character>();
+                c.knockback_player_from_character(transform.parent.right);
+            }
+            play_clash_sound();
         }
     }
-    private void throw_ball()
+    private void play_clash_sound()
     {
+        clash_source.pitch = Random.Range(.9f, 1.1f);
+        clash_source.Play();
+    }
+    private void throw_ball()
+    { 
+        ball_object.current_holder = null;
         ball_object.is_held = false;
         Rigidbody2D rb = ball_object.GetComponent<Rigidbody2D>();
          rb.velocity = Vector2.zero;
          rb.AddForce(transform.right * attack_force, ForceMode2D.Impulse);
+       
     }
     private void OnDisable()
     {
@@ -90,5 +117,11 @@ public class Attack : MonoBehaviour
         thrust_area.SetActive(false);
         is_attacking = false;
         attack_area.enabled = false;
+    }
+    private void play_slash_sound()
+    {
+        source.clip = slash_sounds[Random.Range(0, slash_sounds.Length)];
+        source.pitch = Random.Range(.95f, 1.05f);
+        source.Play();
     }
 }

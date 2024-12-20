@@ -9,6 +9,7 @@ TagManager:
   - player_slot
   - audio_source
   - audio_manager
+  - thrust
   layers:
   - Default
   - TransparentFX

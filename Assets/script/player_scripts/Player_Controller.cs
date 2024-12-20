@@ -4,10 +4,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR;
 
+public enum movement_states
+{
+    DEFAULT,
+    KNOCKBACK
+}
 [RequireComponent(typeof(PlayerInput))]
 public class Player_Controller : MonoBehaviour
 {
-    public float speed;
+    public movement_states movement_State = movement_states.DEFAULT;
+    public float speed, knock_back_resistance, knock_back_power, knock_back_time;
     public Attack attack;
     private Lacrossed_Blades_player inputActions;
     private PlayerInput PlayerInput;
@@ -32,7 +38,15 @@ public class Player_Controller : MonoBehaviour
     private Vector2 movement;
     void FixedUpdate()
     {
-        rb.velocity = movement.normalized * speed;
+        switch (movement_State) 
+        {
+            case movement_states.DEFAULT:
+                rb.velocity = movement.normalized * speed;
+                break;
+            case movement_states.KNOCKBACK:
+                rb.AddForce((movement.normalized * knock_back_resistance), ForceMode2D.Impulse);
+                break;
+        }
     }
     public void set_movement(InputAction.CallbackContext context)
     {
@@ -41,5 +55,16 @@ public class Player_Controller : MonoBehaviour
     public void change_movement_from_other_script(Vector2 new_direction)
     {
         movement = new_direction;
+    }
+    public void knockback_player(Vector2 direction)
+    {
+        movement_State = movement_states.KNOCKBACK;
+        rb.AddForce(knock_back_power*direction, ForceMode2D.Impulse);
+        StartCoroutine(reset_movement_state());
+    }
+    IEnumerator reset_movement_state()
+    {
+        yield return new WaitForSeconds(knock_back_time);
+        movement_State = movement_states.DEFAULT;
     }
 }

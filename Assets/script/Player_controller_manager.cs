@@ -39,8 +39,10 @@ public class Player_controller_manager : MonoBehaviour
                 p.GetComponent<PlayerInput>().enabled = false;
             }
         }
-        if (SceneManager.GetActiveScene().name != "Main_menu" && gameObject != null)
-            Destroy(gameObject);
+        foreach (Transform t in transform) 
+        { 
+            t.gameObject.SetActive(false);
+        }
     }
     public void set_slot(PlayerInput new_input, int slot_number)
     {
@@ -60,6 +62,26 @@ public class Player_controller_manager : MonoBehaviour
     }
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
     {
+        if (scene.name == "Main_menu")
+        {
+            if (transform.childCount != 0) 
+            {
+                foreach (Transform t in transform) 
+                {
+                    t.gameObject.SetActive(true);
+                    t.GetComponent<Controller_recorder_startup>().recreate_icon();
+                }
+            }
+            return;
+        }
         allocate_player_inputs();
+    }
+    public void reset_icons()
+    {
+        foreach (Transform t in transform)
+        {
+            t.gameObject.SetActive(true);
+            t.GetComponent<Controller_recorder_startup>().reset_icon();
+        }
     }
 }

@@ -13,10 +13,13 @@ public class Controller_recorder_startup : MonoBehaviour
     private PlayerInput playerinput;
     private RectTransform player_icon_rect;
     private Vector2 default_position;
+
+    private Color icon_color;
+    private string player_count;
     private void Awake()
     {
         playerinput = GetComponent<PlayerInput>();
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
         transform.parent = GameObject.Find("Player_manager").transform;
         player_manager = GameObject.Find("Player_manager").GetComponent<Player_controller_manager>();
         player_manager.add_player_input(playerinput);
@@ -27,9 +30,10 @@ public class Controller_recorder_startup : MonoBehaviour
         player_icon_rect = temp.GetComponent<RectTransform>();
         player_icon_rect.anchoredPosition = new Vector2(x_pos + offset * (new_parent.childCount - 1), y_pos);
         default_position = player_icon_rect.anchoredPosition;
-        Color icon_color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
+        icon_color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
         temp.GetComponent<RawImage>().color = icon_color;
-        temp.GetComponentInChildren<TMP_Text>().text = "P" + new_parent.childCount.ToString();
+        player_count = "P" + new_parent.childCount.ToString();
+        temp.GetComponentInChildren<TMP_Text>().text = player_count;
         temp.GetComponentInChildren<TMP_Text>().color = icon_color;
     }
     public void change_slot(InputAction.CallbackContext context)
@@ -85,5 +89,17 @@ public class Controller_recorder_startup : MonoBehaviour
     public void reset_icon()
     {
         player_icon_rect.anchoredPosition = default_position;
+    }
+    public void recreate_icon()
+    {
+        Transform new_parent = GameObject.Find("Players").transform;
+        GameObject temp = Instantiate(player_icon_prefab, new_parent);
+        player_icon_rect = temp.GetComponent<RectTransform>();
+        player_icon_rect.anchoredPosition = default_position;
+
+        temp.GetComponent<RawImage>().color = icon_color;
+
+        temp.GetComponentInChildren<TMP_Text>().text = player_count;
+        temp.GetComponentInChildren<TMP_Text>().color = icon_color;
     }
 }

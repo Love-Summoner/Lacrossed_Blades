@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class Audio_handler : MonoBehaviour
 {
     public Slider volume_slider;
-    private float volume = 1.0f;
+    private float volume = 0f;
 
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -33,7 +33,7 @@ public class Audio_handler : MonoBehaviour
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
     {
         if (GameObject.FindGameObjectsWithTag("audio_manager").Length > 1) { 
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
         set_volume();
     }

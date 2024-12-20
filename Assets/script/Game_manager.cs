@@ -9,12 +9,13 @@ public class Game_manager : MonoBehaviour
     private float time_left;
     private int red_score, blue_score, round_count, round_limit;
     public TMP_Text red_score_board, blue_score_board, Time_board;
-    public float time_per_round, respawn_time;
+    public float time_per_round, respawn_time, ball_size = 1;
     private Lacrossed_Blades_player controls;
+    private AudioSource source;
     private void Awake()
     {
         controls = new Lacrossed_Blades_player();
-
+        source = transform.GetComponentInChildren<AudioSource>();
     }
     private void Start()
     {
@@ -28,9 +29,11 @@ public class Game_manager : MonoBehaviour
 
         GameObject temp = Instantiate(ball_prefab, transform);
         temp.name = "ball";
+        temp.transform.localScale = new Vector3(ball_size, ball_size, 1f);
 
         red_score_board.text = red_score.ToString();
         blue_score_board.text = blue_score.ToString();
+        source.Play();
     }
 
     void Update()
