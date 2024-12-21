@@ -15,6 +15,8 @@ public class Player_Controller : MonoBehaviour
     public movement_states movement_State = movement_states.DEFAULT;
     public float speed, knock_back_resistance, knock_back_power, knock_back_time;
     public Attack attack;
+    public Transform character_sprite;
+
     private Lacrossed_Blades_player inputActions;
     private PlayerInput PlayerInput;
 
@@ -38,6 +40,14 @@ public class Player_Controller : MonoBehaviour
     private Vector2 movement;
     void FixedUpdate()
     {
+        if(movement.x < 0 && character_sprite.localScale.x > 0)
+        {
+            character_sprite.localScale = new Vector3(character_sprite.localScale.x * -1, character_sprite.localScale.y, character_sprite.localScale.z);
+        }
+        else if (movement.x > 0 && character_sprite.localScale.x < 0)
+        {
+            character_sprite.localScale = new Vector3(character_sprite.localScale.x*-1, character_sprite.localScale.y, character_sprite.localScale.z);
+        }
         switch (movement_State) 
         {
             case movement_states.DEFAULT:

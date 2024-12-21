@@ -27,13 +27,18 @@ public class Game_manager : MonoBehaviour
         if (is_red) { red_score++; }
         else { blue_score++; }
 
-        GameObject temp = Instantiate(ball_prefab, transform);
-        temp.name = "ball";
-        temp.transform.localScale = new Vector3(ball_size, ball_size, 1f);
+        StartCoroutine(spawn_ball());
 
         red_score_board.text = red_score.ToString();
         blue_score_board.text = blue_score.ToString();
         source.Play();
+    }
+    IEnumerator spawn_ball()
+    {
+        yield return new WaitForSeconds(1);
+        GameObject temp = Instantiate(ball_prefab, transform);
+        temp.name = "ball";
+        temp.transform.localScale = new Vector3(ball_size, ball_size, 1f);
     }
 
     void Update()
@@ -74,7 +79,7 @@ public class Game_manager : MonoBehaviour
         }
         if (red_score != blue_score)
         {
-            Time.timeScale -= Time.deltaTime;
+            Time.timeScale -= Time.deltaTime/3;
         }
         else { Time.timeScale = 1; }
     }

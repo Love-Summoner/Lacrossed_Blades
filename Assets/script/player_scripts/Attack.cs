@@ -27,7 +27,13 @@ public class Attack : MonoBehaviour
     private bool is_attacking = false;
     public void attack()
     {
-        if (ball_object.current_holder == gameObject) 
+        if(GameObject.Find("ball") != null)
+            ball_object = GameObject.Find("ball").GetComponent<ball>();
+        else
+        {
+            ball_object = null;
+        }
+        if (ball_object != null && ball_object.current_holder == gameObject) 
         {
             throw_ball();
         }
@@ -68,7 +74,12 @@ public class Attack : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        ball_object = GameObject.Find("ball").GetComponent<ball>();
+        if (GameObject.Find("ball") != null)
+            ball_object = GameObject.Find("ball").GetComponent<ball>();
+        else
+        {
+            ball_object = null;
+        }
         if (collision.CompareTag("ball")) 
         {
             ball_object.current_holder = null;

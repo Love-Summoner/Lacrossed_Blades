@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class character : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class character : MonoBehaviour
     public bool is_red = true;
     private int current_health = 0;
     public float respawn_time = 3;
+    public SpriteRenderer sprite;
     void Start()
     {
         player_controller = GetComponent<Player_Controller>();
@@ -29,6 +31,8 @@ public class character : MonoBehaviour
 
     public void damage(Vector2 direction)
     {
+        if(invincible)
+            return;
         current_health--;
         if(current_health <= 0)  
             death_event();
@@ -47,6 +51,7 @@ public class character : MonoBehaviour
     {
         yield return new WaitForSeconds(respawn_time);
         transform.position = respawn_point.position;
+        StartCoroutine(invincibility_event());
     }
     private InputDevice device;
     private string control_scheme;
@@ -77,5 +82,30 @@ public class character : MonoBehaviour
     public void knockback_player_from_character(Vector2 direction)
     {
         player_controller.knockback_player(direction);
+    }
+    IEnumerator invincibility_event()
+    {
+        invincible = true;
+        yield return new WaitForSeconds(2);
+        invincible = false;
+    }
+    private bool is_faded = false;
+    private bool invincible = false;
+    IEnumerator fade_in_out()
+    {
+        sprite.color = new Color(1, 1, 1, .4f);
+        is_faded = true;
+        yield return new WaitForSeconds(.2f);
+        sprite.color = new Color(1, 1, 1, 1f);
+        yield return new WaitForSeconds(.2f);
+        is_faded = false;
+
+    }
+    private void Update()
+    {
+        if (invincible && !is_faded)
+        {
+            StartCoroutine(fade_in_out());
+        }
     }
 }
